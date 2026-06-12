@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+    --bg: #14161f;
+    --panel: #1c1f2e;
+    --display-bg: #0f111a;
+    --display-text: #eef0fa;
+    --btn-bg: #262a3d;
+    --btn-hover: #323750;
+    --operator: #ff8c42;
+    --operator-hover: #ffa563;
+    --equals: #5ee6b0;
+    --equals-hover: #7ef4c4;
+    --text-muted: #8a8fb3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 0;
+    background: radial-gradient(circle at 50% 30%, #1f2335 0%, var(--bg) 70%);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--display-text);
+}
+
+/* Display: estiliza a div #resultado diretamente, pois é ela
+   que recebe o texto via JS (o <p id="visor"> some após o primeiro clique) */
+#resultado {
+    width: min(360px, 90vw);
+    min-height: 4.5rem;
+    background: var(--display-bg);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 2.25rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    box-shadow: inset 0 0 0 1px #2a2e44, inset 0 4px 12px rgba(0, 0, 0, 0.4);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+
+
+.container {
+    width: min(360px, 90vw);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    background: var(--panel);
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+button {
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 14px;
+    background: var(--btn-bg);
+    color: var(--display-text);
+    font-family: inherit;
+    font-size: 1.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background: var(--btn-hover);
+}
+
+button:active {
+    transform: scale(0.94);
+}
+
+button:focus-visible {
+    outline: 2px solid var(--equals);
+    outline-offset: 2px;
+}
+
+/* Operadores e funções: C, %, /, *, -, +, ⬅️ */
+.container button:nth-child(1),
+.container button:nth-child(2),
+.container button:nth-child(3),
+.container button:nth-child(4),
+.container button:nth-child(8),
+.container button:nth-child(12),
+.container button:nth-child(16) {
+    background: transparent;
+    color: var(--operator);
+    font-size: 1.1rem;
+}
+
+.container button:nth-child(1):hover,
+.container button:nth-child(2):hover,
+.container button:nth-child(3):hover,
+.container button:nth-child(4):hover,
+.container button:nth-child(8):hover,
+.container button:nth-child(12):hover,
+.container button:nth-child(16):hover {
+    color: var(--operator-hover);
+    background: var(--btn-bg);
+}
+
+/* Botão "=": elemento de assinatura, em destaque */
+.container button:last-child {
+    background: var(--equals);
+    color: #0f111a;
+    font-weight: 700;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(94, 230, 176, 0.08);
+}
+
+.container button:last-child:hover {
+    background: var(--equals-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+}
+
+@media (max-width: 400px) {
+    #resultado {
+        font-size: 1.75rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
